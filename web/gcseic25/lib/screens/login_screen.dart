@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'home_screen.dart'; // ajuste o caminho se necessário
+import 'home_screen.dart';
+import 'forgotpassword_screen.dart';
+import 'Signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -28,12 +30,17 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black, 
+      backgroundColor: Colors.black,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Image.asset(
+              'assets/images/black_logo.png',
+              height: 300,
+            ),
+            const SizedBox(height: 32),
             TextField(
               controller: _userController,
               style: const TextStyle(color: Colors.white),
@@ -71,7 +78,33 @@ class _LoginScreenState extends State<LoginScreen> {
                 backgroundColor: Colors.white,
                 foregroundColor: Colors.black,
               ),
-              child: const Text('Entrar'),
+              child: const Text('Log in'),
+            ),
+            const SizedBox(height: 12),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => const ForgotPasswordScreen()),
+                );
+              },
+              child: const Text(
+                'Forget password?',
+                style: TextStyle(color: Colors.white70),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const SignupScreen()),
+                );
+              },
+              child: const Text(
+                'Signup!',
+                style: TextStyle(color: Colors.white70),
+              ),
             ),
           ],
         ),
