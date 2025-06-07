@@ -77,6 +77,48 @@
             }
           }
         }
+      },
+      "/api/cnh-validator/validate-cnh": {
+        "post": {
+          "summary": "Valida um número de CNH",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "cnhNumber": {
+                      "type": "string",
+                      "example": "12345678900"
+                    }
+                  },
+                  "required": ["cnhNumber"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Resultado da validação da CNH",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "isValid": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Erro - cnhNumber não fornecido"
+            }
+          }
+        }
       }
     }
   }

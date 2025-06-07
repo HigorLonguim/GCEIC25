@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class SplashScreen1 extends StatefulWidget {
   final Widget nextPage;
 
-  const SplashScreen1({required this.nextPage});
+  const SplashScreen1({super.key, required this.nextPage});
 
   @override
   _SplashScreenState1 createState() => _SplashScreenState1();
@@ -41,7 +41,7 @@ class _SplashScreenState1 extends State<SplashScreen1> {
 class ConsultaPage1 extends StatefulWidget {
   final String title;
 
-  const ConsultaPage1({required this.title});
+  const ConsultaPage1({super.key, required this.title});
 
   @override
   _ConsultaPageState1 createState() => _ConsultaPageState1();
