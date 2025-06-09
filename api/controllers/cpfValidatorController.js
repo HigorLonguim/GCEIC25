@@ -10,4 +10,4 @@ exports.validate = (req, res) => {
     success: isValid,
     mensagem: isValid ? 'CPF válido.' : 'CPF inválido.'
   });
-}; 
+};

@@ -3,6 +3,12 @@ import 'screens/home_screen.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'screens/sobre_screen.dart';
+import 'screens/splash_screen.dart';
+import 'screens/login_screen.dart';
+import 'screens/signup_screen.dart';
+import 'screens/forgotpassword_screen.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -15,16 +21,23 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'API Hub',
       theme: ThemeData(primarySwatch: Colors.blue),
-      initialRoute: '/',
+      initialRoute: '/splash',
       routes: {
-        '/': (context) => const HomeScreen(),
+        '/splash': (context) => const SplashScreen(),
+        '/login': (context) => const LoginScreen(),
+        '/signup': (context) => const SignupScreen(),
+        '/forgotpassword': (context) => const ForgotPasswordScreen(),
+        '/home': (context) => const HomeScreen(),
         '/cpf': (context) => const CPFScreen(),
         '/cnh': (context) => const CNHScreen(),
         '/calculate-premium': (context) => const CalculatePremiumScreen(),
+        '/sobre_screen': (context) => const SobreScreen(),
       },
+
     );
   }
 }
+
 
 class CPFScreen extends StatefulWidget {
   const CPFScreen({super.key});
@@ -131,7 +144,9 @@ class _CNHScreenState extends State<CNHScreen> {
     });
     final url = Uri.parse('http://localhost:3000/api/cnh-validator/validate-cnh');
     try {
-      final response = await http.post(url, body: jsonEncode({'cnhNumber': cnh}), headers: {'Content-Type': 'application/json'});
+      final response = await http.post(url,
+          body: jsonEncode({'cnhNumber': cnh}),
+          headers: {'Content-Type': 'application/json'});
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         setState(() {
@@ -164,7 +179,8 @@ class _CNHScreenState extends State<CNHScreen> {
           children: [
             TextField(
               controller: _cnhController,
-              decoration: const InputDecoration(labelText: 'Digite o número da CNH'),
+              decoration:
+              const InputDecoration(labelText: 'Digite o número da CNH'),
               keyboardType: TextInputType.number,
             ),
             const SizedBox(height: 20),
@@ -197,7 +213,8 @@ class _CalculatePremiumScreenState extends State<CalculatePremiumScreen> {
   final TextEditingController _makeController = TextEditingController();
   final TextEditingController _modelController = TextEditingController();
   final TextEditingController _driverAgeController = TextEditingController();
-  final TextEditingController _licenseDurationController = TextEditingController();
+  final TextEditingController _licenseDurationController =
+  TextEditingController();
   String _mensagem = '';
   bool _loading = false;
 
@@ -207,7 +224,11 @@ class _CalculatePremiumScreenState extends State<CalculatePremiumScreen> {
     final model = _modelController.text.trim();
     final driverAge = int.tryParse(_driverAgeController.text.trim());
     final licenseDuration = int.tryParse(_licenseDurationController.text.trim());
-    if (year == null || make.isEmpty || model.isEmpty || driverAge == null || licenseDuration == null) {
+    if (year == null ||
+        make.isEmpty ||
+        model.isEmpty ||
+        driverAge == null ||
+        licenseDuration == null) {
       setState(() {
         _mensagem = 'Preencha todos os campos corretamente.';
       });
@@ -279,13 +300,14 @@ class _CalculatePremiumScreenState extends State<CalculatePremiumScreen> {
               const SizedBox(height: 20),
               TextField(
                 controller: _driverAgeController,
-                decoration: const InputDecoration(labelText: 'Idade do Condutor'),
+                decoration: const InputDecoration(labelText: 'Idade do Motorista'),
                 keyboardType: TextInputType.number,
               ),
               const SizedBox(height: 20),
               TextField(
                 controller: _licenseDurationController,
-                decoration: const InputDecoration(labelText: 'Tempo de Habilitação (anos)'),
+                decoration:
+                const InputDecoration(labelText: 'Tempo de CNH (anos)'),
                 keyboardType: TextInputType.number,
               ),
               const SizedBox(height: 20),
